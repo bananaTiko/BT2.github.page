@@ -1,29 +1,36 @@
-// Function to darken a given color
-function darkenColor(color, percent) {
-    var num = parseInt(color.slice(1), 16),
-        amt = Math.round(2.55 * percent),
-        R = (num >> 16) - amt,
-        G = (num >> 8 & 0x00FF) - amt,
-        B = (num & 0x0000FF) - amt;
-    return '#' + (0x1000000 + (R < 0 ? 0 : R > 255 ? 255 : R) * 0x10000 + 
-                  (G < 0 ? 0 : G > 255 ? 255 : G) * 0x100 + 
-                  (B < 0 ? 0 : B > 255 ? 255 : B)).toString(16).slice(1).toUpperCase();
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-// Example usage
-document.addEventListener("DOMContentLoaded", function() {
-    // Define the original color
-    var originalColor = "#FF0000"; // Red color example
-    
-    // Darken the color by 30%
-    var darkenedColor = darkenColor(originalColor, 30);
-    
-    // Apply the darkened color to elements as needed
-    document.body.style.backgroundColor = darkenedColor;
-    
-    // Additional example
-    var headerText = document.querySelector(".header-text");
-    if (headerText) {
-        headerText.style.color = darkenColor("#0000FF", 30); // Darken blue color by 30%
-    }
-});
+.container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#pianoContainer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pianoKey {
+    display: inline-block;
+    width: 40px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 2px;
+    cursor: pointer;
+}
