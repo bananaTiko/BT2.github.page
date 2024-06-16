@@ -78,9 +78,13 @@ function playMIDI() {
         // Display piano keys with notes
         displayPianoAndNotes(pianoNotes);
         
-        // Load audio file (adjust path as needed)
-        const audioFilePath = 'file/Audio/instrument_x.wav'; // Adjust this path
-        loadAudioFile(audioFilePath)
+        // Load audio file based on instrument from instruments.txt
+        loadInstrumentPaths()
+            .then(() => {
+                console.log('Instruments loaded successfully.');
+                const instrumentFilePath = instrumentPaths[0]; // Example: Load first instrument path
+                return loadAudioFile(instrumentFilePath);
+            })
             .then(() => {
                 console.log('Audio file loaded successfully.');
             })
@@ -94,6 +98,17 @@ function playMIDI() {
     };
     
     reader.readAsArrayBuffer(file);
+}
+
+// Function to load instrument paths from instruments.txt
+function loadInstrumentPaths() {
+    return fetch('file/audio/instruments.txt')
+        .then(response => response.text())
+        .then(data => {
+            // Split data into array of paths
+            instrumentPaths = data.trim().split('\n');
+        })
+        .catch(error => console.error('Error loading instrument paths:', error));
 }
 
 // Example MidiFile class for demonstration purposes
@@ -204,7 +219,7 @@ function noteShouldBePlayed(midiNote) {
 // Function to get note name from MIDI note number
 function getNoteName(midiNote) {
     const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    const octave = Math.floor(midiNote / 12) - 1;
+    const octave = Math.floor(midiNote / 12);
     const noteIndex = midiNote % 12;
     return noteNames[noteIndex] + octave;
 }
