@@ -1,4 +1,30 @@
-<h1>testing</h1>
-<h2>1<h2>
-<h3>2</h3>
-<h3>3</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Fonts Example</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('custom-font.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            font-family: 'CustomFont', sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Custom Fonts Example</h1>
+    <p>This is an example of a web page using a custom font from a local file.</p>
+    <h2>Subheading</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</body>
+</html>
