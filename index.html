@@ -3,28 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Fonts Example</title>
-    <style>
-        @font-face {
-            font-family: 'CustomFont';
-            src: url('custom-font.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        body {
-            font-family: 'CustomFont', sans-serif;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        h1, h2 {
-            font-weight: bold;
-        }
-    </style>
+    <title>Custom Fonts and Header Image Example</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to Custom Fonts Example</h1>
-    <p>This is an example of a web page using a custom font from a local file.</p>
-    <h2>Subheading</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <header>
+        <div class="header-text">
+            <h1>Welcome to Custom Fonts Example</h1>
+        </div>
+    </header>
+    <div class="content">
+        <p>This is an example of a web page using a custom font from a local file placed in the fonts folder.</p>
+        <h2>Subheading</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
 </body>
 </html>
