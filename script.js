@@ -23,5 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Additional example
     var headerText = document.querySelector(".header-text");
-    headerText.style.color = darkenColor("#0000FF", 30); // Darken blue color by 30%
+    if (headerText) {
+        headerText.style.color = darkenColor("#0000FF", 30); // Darken blue color by 30%
+    }
 });
