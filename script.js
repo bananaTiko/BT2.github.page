@@ -112,24 +112,32 @@ class MidiFile {
     getPianoNotes() {
         // Example: Extract piano notes from MIDI file
         // Return array of piano notes as MIDI note numbers
-        return [
-            60, 62, 64, 65, 67, 69, 71, 72 // Example MIDI note numbers (C4 to C5)
-        ];
+        // Adjust range from C0 to B9 (21 to 118)
+        const pianoNotes = [];
+        for (let note = 21; note <= 118; note++) {
+            pianoNotes.push(note);
+        }
+        return pianoNotes;
     }
 }
 
 // Function to display piano keys with notes
 function displayPianoAndNotes(pianoNotes) {
     const pianoContainer = document.getElementById('pianoContainer');
+    const pianoAppContainer = document.getElementById('pianoAppContainer');
+    const speedControl = document.getElementById('speedControl');
     
-    // Clear previous notes if any
+    // Clear previous piano keys if any
     pianoContainer.innerHTML = '';
+    
+    // Clear previous piano app interface if any
+    pianoAppContainer.innerHTML = '';
     
     // Create piano keys with notes
     pianoNotes.forEach(note => {
         const keyElement = document.createElement('div');
         keyElement.className = 'pianoKey';
-        keyElement.textContent = note; // Display MIDI note number for simplicity
+        keyElement.textContent = getNoteName(note); // Display note name
         keyElement.addEventListener('mousedown', () => {
             setPitch(note);
             playAudio(); // Start playback when key is pressed
@@ -137,6 +145,68 @@ function displayPianoAndNotes(pianoNotes) {
         keyElement.addEventListener('mouseup', stopAudio); // Stop playback on key release
         pianoContainer.appendChild(keyElement);
     });
+    
+    // Create digital piano app interface
+    const appInterface = document.createElement('div');
+    appInterface.className = 'pianoAppInterface';
+    
+    // Create speed control for music
+    const speedLabel = document.createElement('label');
+    speedLabel.textContent = 'Speed:';
+    
+    const speedInput = document.createElement('input');
+    speedInput.type = 'range';
+    speedInput.min = '0.5';
+    speedInput.max = '2.0';
+    speedInput.step = '0.1';
+    speedInput.value = '1.0';
+    speedInput.id = 'speedControlInput';
+    
+    const speedDisplay = document.createElement('span');
+    speedDisplay.id = 'speedDisplay';
+    speedDisplay.textContent = speedInput.value;
+    
+    speedInput.addEventListener('input', () => {
+        speedDisplay.textContent = speedInput.value;
+        // Adjust playback speed based on input value
+        if (audioSource) {
+            audioSource.playbackRate.value = parseFloat(speedInput.value);
+        }
+    });
+    
+    speedControl.appendChild(speedLabel);
+    speedControl.appendChild(speedInput);
+    speedControl.appendChild(speedDisplay);
+    
+    // Example: Create piano keys with notes lit up (based on MIDI data)
+    pianoNotes.forEach(note => {
+        const keyElement = document.createElement('div');
+        keyElement.className = 'pianoKeyApp';
+        keyElement.textContent = getNoteName(note); // Display note name
+        
+        // Add class to indicate note to play (example: green notes)
+        if (noteShouldBePlayed(note)) {
+            keyElement.classList.add('noteToPlay');
+        }
+        
+        appInterface.appendChild(keyElement);
+    });
+    
+    pianoAppContainer.appendChild(appInterface);
+}
+
+// Example function to determine if note should be played (replace with actual logic)
+function noteShouldBePlayed(midiNote) {
+    // Example: Determine if MIDI note should be played based on MIDI data or user input
+    return true; // Replace with actual logic
+}
+
+// Function to get note name from MIDI note number
+function getNoteName(midiNote) {
+    const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const octave = Math.floor(midiNote / 12) - 1;
+    const noteIndex = midiNote % 12;
+    return noteNames[noteIndex] + octave;
 }
 
 // Function to save instrument paths to text file
