@@ -1,12 +1,12 @@
 @font-face {
-    font-family: 'CustomFont';
-    src: url('fonts/custom-font.woff2') format('woff2');
+    font-family: 'Pah';
+    src: url('fonts/Pah.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 body {
-    font-family: 'CustomFont', sans-serif;
+    font-family: 'Pah', sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
@@ -34,14 +34,4 @@ header::after {
     padding: 20px;
 }
 
-h1, h2 {
-    font-weight: bold;
-}
-
-.header-text {
-    position: relative;
-    z-index: 1;
-    color: #333;
-    text-align: center;
-    padding-top: 100px;
-}
+h1, h2
